@@ -10,6 +10,7 @@ import {
   handleCanvaseMouseMove,
   handleCanvasMouseUp,
   handleResize,
+  renderCanvas,
 } from "@/lib/canvas";
 import { ActiveElement } from "@/types/type";
 import { useMutation, useStorage } from "@/liveblocks.config";
@@ -90,6 +91,14 @@ export default function Page() {
       handleResize({ fabricRef });
     });
   }, []);
+
+  useEffect(() => {
+    renderCanvas({
+      fabricRef,
+      canvasObjects,
+      activeObjectRef,
+    });
+  }, [canvasObjects]);
 
   return (
     <main className="h-screen overflow-hidden">
