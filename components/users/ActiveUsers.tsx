@@ -7,9 +7,8 @@ import { useOthers, useSelf } from "@/liveblocks.config";
 
 import Avatar from "./Avatar";
 
-const users = useOthers();
-
 const ActiveUsers = () => {
+  const users = useOthers();
   /**
    * useOthers returns the list of other users in the room.
    *
