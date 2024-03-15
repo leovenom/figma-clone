@@ -165,6 +165,7 @@ export type CanvasSelectionCreated = {
   options: fabric.IEvent;
   isEditingRef: React.MutableRefObject<boolean>;
   setElementAttributes: React.Dispatch<React.SetStateAction<Attributes>>;
+  isEditingRef: React.MutableRefObject<boolean>;
 };
 
 export type CanvasObjectScaling = {
