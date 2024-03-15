@@ -17,6 +17,7 @@ import { ActiveElement } from "@/types/type";
 import { useMutation, useStorage } from "@/liveblocks.config";
 import LeftSidebar from "../components/LeftSidebar";
 import { defaultNavElement } from "@/constants";
+import { handleDelete } from "@/lib/key-events";
 
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -70,7 +71,7 @@ export default function Page() {
     switch (elem?.value) {
       case "reset":
         deleteAllShapes();
-        fabricRef.current.clear();
+        fabricRef.current?.clear();
         setActiveElement(defaultNavElement);
         break;
 
@@ -151,7 +152,7 @@ export default function Page() {
         handleActiveElement={handleActiveElement}
       />
       <section className="flex h-full flex-row">
-        <LeftSidebar />
+        <LeftSidebar allShapes={Array.from(canvasObjects)} />
         <Live canvasRef={canvasRef} />
         <RightSideBar />
       </section>
