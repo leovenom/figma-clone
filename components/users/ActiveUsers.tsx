@@ -8,7 +8,8 @@ import { useOthers, useSelf } from "@/liveblocks.config";
 import Avatar from "./Avatar";
 
 const ActiveUsers = () => {
-  const users = useOthers();
+  /**
+   * const users = useOthers();
   /**
    * useOthers returns the list of other users in the room.
    *
@@ -25,15 +26,15 @@ const ActiveUsers = () => {
 
   // memoize the result of this function so that it doesn't change on every render but only when there are new users joining the room
   const memoizedUsers = useMemo(() => {
-    const hasMoreUsers = users.length > 2;
+    const hasMoreUsers = others.length > 2;
 
     return (
-      <div className="flex items-center justify-center gap-1 py-2">
+      <div className="flex items-center justify-center gap-1">
         {currentUser && (
           <Avatar name="You" otherStyles="border-[3px] border-primary-green" />
         )}
 
-        {users.slice(0, 2).map(({ connectionId }) => (
+        {others.slice(0, 2).map(({ connectionId }) => (
           <Avatar
             key={connectionId}
             name={generateRandomName()}
@@ -43,12 +44,12 @@ const ActiveUsers = () => {
 
         {hasMoreUsers && (
           <div className="z-10 -ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-primary-black">
-            +{users.length - 2}
+            +{others.length - 2}
           </div>
         )}
       </div>
     );
-  }, [users.length]);
+  }, [others.length]);
 
   return memoizedUsers;
 };
