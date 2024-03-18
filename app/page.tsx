@@ -13,6 +13,7 @@ import {
   renderCanvas,
   handleCanvasObjectModified,
   handleCanvasSelectionCreated,
+  handleCanvasObjectScaling,
 } from "@/lib/canvas";
 import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
@@ -158,6 +159,13 @@ export default function Page() {
       handleCanvasSelectionCreated({
         options,
         isEditingRef,
+        setElementAttributes,
+      });
+    });
+
+    canvas.on("object:scaling", (options: any) => {
+      handleCanvasObjectScaling({
+        options,
         setElementAttributes,
       });
     });

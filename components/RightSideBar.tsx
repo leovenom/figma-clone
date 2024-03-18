@@ -4,6 +4,7 @@ import Text from "./settings/Text";
 import Color from "./settings/Color";
 import Export from "./settings/Export";
 import { RightSidebarProps } from "@/types/type";
+import { modifyShape } from "@/lib/shapes";
 
 const RightSideBar = ({
   elementAttributes,
@@ -15,6 +16,19 @@ const RightSideBar = ({
 }: RightSidebarProps) => {
   const handleInputChange = (property: string, value: string) => {
     if (!isEditingRef.current) isEditingRef.current = true;
+
+    setElementAttributes((prev) => ({
+      ...prev,
+      [property]: value,
+    }));
+
+    modifyShape({
+      canvas: fabricRef.current as fabric.Canvas,
+      property,
+      value,
+      activeObjectRef,
+      syncShapeInStorage,
+    });
   };
 
   return (
@@ -28,6 +42,7 @@ const RightSideBar = ({
         width={elementAttributes.width}
         height={elementAttributes.height}
         handleInputChange={handleInputChange}
+        isEditingRef={isEditingRef}
       />
       <Text />
       <Color />
